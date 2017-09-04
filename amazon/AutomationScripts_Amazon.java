@@ -76,7 +76,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				By by_ResultList = getBy(locatorType,value);
 				WebElement ele_ResultList = wait.until(ExpectedConditions.visibilityOfElementLocated(by_ResultList));
 				String val1 = ele_ResultList.getText();
-				Assert.assertTrue(val1.contains("results for"));
+				Assert.assertTrue(val1.contains(searchItem));
 
 				//Locate product and click
 				setValue(4);
@@ -307,6 +307,8 @@ public class AutomationScripts_Amazon extends ReusableMethods
 
 				//Launch application
 				driver.get(url);
+
+				//Maximize if chrome
 				if(browserName.equals("chrome"))
 				{
 					driver.manage().window().maximize();
@@ -392,9 +394,11 @@ public class AutomationScripts_Amazon extends ReusableMethods
 
 	public static String TestCase_4() throws IOException
 	{
+		//Get browser name
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
+
 		startReport("Amazon_TestCase_4","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 
 		try
@@ -413,6 +417,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 
 				//Launch application
 				driver.get(url);
+
 				if(browserName.equals("chrome"))
 				{
 					driver.manage().window().maximize();
@@ -524,7 +529,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				for(WebElement w: list)
 				{
 					String s = w.getText();
-					actualValues.add(s);
+					actualValues.add(s.trim());
 				}
 
 				Thread.sleep(5000);
@@ -588,6 +593,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
+
 		startReport("Amazon_TestCase_6","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
@@ -635,7 +641,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				By by_ResultList = getBy(locatorType,value);
 				WebElement ele_ResultList = driver.findElement(by_ResultList);
 				String val1 = ele_ResultList.getText();
-				Assert.assertTrue(val1.contains("results for"));
+				Assert.assertTrue(val1.contains(searchItem));
 
 				//Locate product and click
 				setValue(16);
@@ -827,6 +833,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
+
 		startReport("Amazon_TestCase_8","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
@@ -874,7 +881,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				By by_ResultList = getBy(locatorType,value);
 				WebElement ele_ResultList = driver.findElement(by_ResultList);
 				String val1 = ele_ResultList.getText();
-				Assert.assertTrue(val1.contains("results for"));
+				Assert.assertTrue(val1.contains(searchData));
 
 				//Locate and click product
 				setValue(26);
@@ -949,7 +956,11 @@ public class AutomationScripts_Amazon extends ReusableMethods
 
 	public static String TestCase_9() throws IOException
 	{
-		startReport("Amazon_TestCase_9","C:/Users/Seema/Desktop/AmazonReport/","Chrome");
+		//Get browser Name
+		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+		String browserName = cap.getBrowserName().toLowerCase();
+		System.out.println(browserName);
+		startReport("Amazon_TestCase_9","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
 			String orPath = "C:/Users/Seema/Desktop/AmazonData/ObjectRepository.xls";
@@ -967,7 +978,12 @@ public class AutomationScripts_Amazon extends ReusableMethods
 
 				//Launch application
 				driver.get(url);
-				//driver.manage().window().maximize();
+
+				driver.get(url);
+				if(browserName.equals("chrome"))
+				{
+					driver.manage().window().maximize();
+				}
 
 				Thread.sleep(5000);
 
@@ -994,7 +1010,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				By by_ResultList = getBy(locatorType,value);
 				WebElement ele_ResultList = driver.findElement(by_ResultList);
 				String val1 = ele_ResultList.getText();
-				Assert.assertTrue(val1.contains("results for"));
+				Assert.assertTrue(val1.contains(searchData));
 
 				//Locate and click product
 				setValue(26);
@@ -1123,7 +1139,12 @@ public class AutomationScripts_Amazon extends ReusableMethods
 
 	public static String TestCase_10() throws IOException
 	{
-		startReport("Amazon_TestCase_10","C:/Users/Seema/Desktop/AmazonReport/","Chrome");
+		//Get browser Name
+		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
+		String browserName = cap.getBrowserName().toLowerCase();
+		System.out.println(browserName);
+		
+		startReport("Amazon_TestCase_10","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
 			String orPath = "C:/Users/Seema/Desktop/AmazonData/ObjectRepository.xls";
@@ -1139,7 +1160,11 @@ public class AutomationScripts_Amazon extends ReusableMethods
 
 				//Launch application
 				driver.get(url);
-				//driver.manage().window().maximize();
+				driver.get(url);
+				if(browserName.equals("chrome"))
+				{
+					driver.manage().window().maximize();
+				}
 
 				Thread.sleep(5000);
 
