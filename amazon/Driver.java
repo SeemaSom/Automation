@@ -51,6 +51,15 @@ public class Driver
 					if(ie_Browser.toString().equalsIgnoreCase("Y"))
 					{
 						System.setProperty("webdriver.edge.driver", "C:/Users/Seema/Downloads/MicrosoftWebDriver.exe");
+						/*DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+
+						ieCapabilities.setCapability("nativeEvents", false);    
+						ieCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
+						ieCapabilities.setCapability("ignoreProtectedModeSettings", true);
+						ieCapabilities.setCapability("disable-popup-blocking", true);
+						ieCapabilities.setCapability("enablePersistentHover", true);
+
+						driver = new InternetExplorerDriver(ieCapabilities);*/
 						driver = new EdgeDriver();
 						Object testCase = recData[i][2];
 						Method tc = AutomationScripts_Amazon.class.getMethod(testCase.toString());

@@ -25,6 +25,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -422,6 +423,28 @@ public class ReusableMethods extends Driver
 			System.out.println(objName+" is disabled");
 		}
 
+	}
+	
+	/*
+	 * Name of Method: clickElement
+	 * Brief Description: Clicks an element
+	 * Arguments: obj(Button/Linktext),objName(Name of the object)
+	 * Created By: Seema
+	 * Creation Date: 09 Sep 2017
+	 * Last Modified Date: 09 Sep 2017
+	 */
+	public static void clickElement2(WebElement obj, String objName)
+	{
+		//String s = "arguments["+ i +"].click();";
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		if(obj.isDisplayed() && obj.isEnabled())
+		{
+		executor.executeScript("arguments[4].click();", obj);
+		}
+		else
+		{
+			System.out.println(objName+" is disabled");
+		}
 	}
 	
 	/*

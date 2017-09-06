@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,7 +29,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
-
+		String valResult="";
 		startReport("Amazon_TestCase_1","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
@@ -67,7 +68,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(2);
 				By by_SearchButton = getBy(locatorType,value);
 				WebElement click_SearchButton = driver.findElement(by_SearchButton);
-				clickElement(click_SearchButton,objName);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_SearchButton,objName);
+				}
+				else
+				{
+					clickElement(click_SearchButton,objName);
+				}
 
 				Thread.sleep(5000);
 
@@ -78,11 +86,18 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				String val1 = ele_ResultList.getText();
 				Assert.assertTrue(val1.contains(searchItem));
 
-				//Locate product and click
+				//Locate and click product
 				setValue(4);
 				By by_Product = getBy(locatorType,value);
 				WebElement click_Product = driver.findElement(by_Product);
-				clickElement(click_Product,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_Product,obj_Name);
+				}
+				else
+				{
+					clickElement(click_Product,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -94,7 +109,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(5);
 				By by_AddtoCart = getBy(locatorType,value);
 				WebElement click_AddtoCart = driver.findElement(by_AddtoCart);
-				clickElement(click_AddtoCart,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_AddtoCart,obj_Name);
+				}
+				else
+				{
+					clickElement(click_AddtoCart,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -106,7 +128,13 @@ public class AutomationScripts_Amazon extends ReusableMethods
 					WebElement click_NoThanks = driver.findElement(by_NoThanks);
 					if(click_NoThanks.isDisplayed() && click_NoThanks.isEnabled())
 					{
-						clickElement(click_NoThanks,obj_Name);
+						if(browserName.equalsIgnoreCase("microsoftedge"))
+						{
+							clickElement(click_NoThanks,obj_Name);						}
+						else
+						{
+							clickElement(click_NoThanks,obj_Name);
+						}
 					}
 				}
 				catch(Exception e)
@@ -119,16 +147,16 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(8);
 				By by_CartItems = getBy(locatorType,value);
 				String val3 = driver.findElement(by_CartItems).getText();
-				result = verify("1",val3);
+				valResult = verify("1",val3);
 
 				//Send result for print
-				if(result.equals("Pass"))
+				if(valResult.equals("Pass"))
 				{
-					Update_Report( result, "Amazon_TestCase_1",  "Execution Completed",driver);
+					Update_Report( valResult, "Amazon_TestCase_1",  "Execution Completed",driver);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_1",  "Verification Failed",driver);
+					Update_Report( valResult, "Amazon_TestCase_1",  "Verification Failed",driver);
 				}
 				driver.close();
 			}
@@ -139,7 +167,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 	public static String TestCase_2() throws IOException
@@ -148,7 +176,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
-
+		String valResult="";
 		startReport("Amazon_TestCase_2","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 
 		try
@@ -228,12 +256,12 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				if (expectedSet.containsAll(actualValues))
 				{
 					System.out.print("expectedSet.containsAll(actualValues)");
-					result="Pass";
+					valResult="Pass";
 				} 
 				else
 				{
 					System.out.print("Expected not equals actual");
-					result="Fail";
+					valResult="Fail";
 				}
 
 				//Locate and verify Your Amazon.com
@@ -254,17 +282,17 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				{
 					String val3 = ele_Link2.getText();
 					Assert.assertEquals(val3, "Today's Deals");
-					//result=verify("Today's Deals",val3);
+					//valResult=verify("Today's Deals",val3);
 				}
 
-				//Send result for print
-				if(result.equals("Pass"))
+				//Send valResult for print
+				if(valResult.equals("Pass"))
 				{
-					Update_Report( result, "Amazon_TestCase_2",  "Execution Completed",driver);
+					Update_Report( valResult, "Amazon_TestCase_2",  "Execution Completed",driver);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_2",  "Verification Failed",driver);
+					Update_Report( valResult, "Amazon_TestCase_2",  "Verification Failed",driver);
 				}
 				driver.close();	
 			}
@@ -274,7 +302,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 	public static String TestCase_3() throws IOException
@@ -283,7 +311,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
-
+		String valResult="";
 		startReport("Amazon_TestCase_3","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 
 		try
@@ -364,22 +392,22 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				if (expectedSet.containsAll(actualValues))
 				{
 					System.out.print("expectedSet.containsAll(actualValues)");
-					result="Pass";
+					valResult="Pass";
 				} 
 				else
 				{
 					System.out.print("Expected not equals actual");
-					result="Fail";
+					valResult="Fail";
 				}
 
-				//Send result for print
-				if(result.equals("Pass"))
+				//Send valResult for print
+				if(valResult.equals("Pass"))
 				{
-					Update_Report( result, "Amazon_TestCase_3",  "Execution Completed",driver);
+					Update_Report( valResult, "Amazon_TestCase_3",  "Execution Completed",driver);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_3",  "Verification Failed",driver);
+					Update_Report( valResult, "Amazon_TestCase_3",  "Verification Failed",driver);
 				}
 				driver.close();	
 			}
@@ -389,7 +417,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 	public static String TestCase_4() throws IOException
@@ -398,7 +426,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
-
+		String valResult="";
 		startReport("Amazon_TestCase_4","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 
 		try
@@ -453,16 +481,16 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				values = ddValues.toArray(values);
 				System.out.println(Arrays.toString(values));
 				System.out.println(Arrays.toString(expected));
-				result = verifyDDValues(expected,values);
+				valResult = verifyDDValues(expected,values);
 
-				//Send result for print
-				if(result.equals("Pass"))
+				//Send valResult for print
+				if(valResult.equals("Pass"))
 				{
-					Update_Report( result, "Amazon_TestCase_4",  "Execution Completed",driver);
+					Update_Report( valResult, "Amazon_TestCase_4",  "Execution Completed",driver);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_4",  "Verification Failed",driver);
+					Update_Report( valResult, "Amazon_TestCase_4",  "Verification Failed",driver);
 				}
 				driver.close();	
 			}
@@ -472,7 +500,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 	public static String TestCase_5() throws IOException
@@ -481,7 +509,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
-
+		String valResult="";
 		startReport("Amazon_TestCase_5","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 
 		try
@@ -550,30 +578,37 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				if (expectedSet.containsAll(actualValues))
 				{
 					System.out.print("expectedSet.containsAll(actualValues)");
-					result="Pass";
+					valResult="Pass";
 				} 
 				else
 				{
 					System.out.print("Expected not equals actual");
-					result="Fail";
+					valResult="Fail";
 				}
 
 				//Select Clothing, Shoes & Jewelry from drop down
 				setValue(15);
 				By by_All1 = getBy(locatorType,value);
 				WebElement ele_All1 = driver.findElement(by_All1);
-				clickElement(ele_All1,obj_Name);
-				Thread.sleep(3000);
-				select.selectByValue(selectValue);
-
-				//Send result for print
-				if(result.equals("Pass"))
+				if(browserName.equalsIgnoreCase("microsoftedge"))
 				{
-					Update_Report( result, "Amazon_TestCase_5",  "Execution Completed",driver);
+					clickElement2(ele_All1,obj_Name);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_5",  "Verification Failed",driver);
+					clickElement(ele_All1,obj_Name);
+				}
+				Thread.sleep(3000);
+				select.selectByValue(selectValue);
+
+				//Send valResult for print
+				if(valResult.equals("Pass"))
+				{
+					Update_Report( valResult, "Amazon_TestCase_5",  "Execution Completed",driver);
+				}
+				else
+				{
+					Update_Report( valResult, "Amazon_TestCase_5",  "Verification Failed",driver);
 				}
 				driver.close();	
 			}
@@ -583,7 +618,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 
@@ -593,7 +628,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
-
+		String valResult="";
 		startReport("Amazon_TestCase_6","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
@@ -632,11 +667,17 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(2);
 				By by_SearchButton = getBy(locatorType,value);
 				WebElement click_SearchButton = driver.findElement(by_SearchButton);
-				clickElement(click_SearchButton,obj_Name);
-
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_SearchButton,obj_Name);
+				}
+				else
+				{
+					clickElement(click_SearchButton,obj_Name);
+				}
 				Thread.sleep(3000);
 
-				//Validate show result
+				//Validate show valResult
 				setValue(3);
 				By by_ResultList = getBy(locatorType,value);
 				WebElement ele_ResultList = driver.findElement(by_ResultList);
@@ -647,8 +688,15 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(16);
 				By by_Product = getBy(locatorType,value);
 				WebElement click_Product = driver.findElement(by_Product);
-				clickElement(click_Product,obj_Name);
-
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_Product,obj_Name);
+				}
+				else
+				{
+					clickElement(click_Product,obj_Name);
+				}
+				
 				Thread.sleep(3000);
 
 				//Validate navigation to product page
@@ -659,18 +707,29 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(17);
 				By by_AddtoCart = getBy(locatorType,value);
 				WebElement click_AddtoCart = driver.findElement(by_AddtoCart);
-				clickElement(click_AddtoCart,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_AddtoCart,obj_Name);
+				}
+				else
+				{
+					clickElement(click_AddtoCart,obj_Name);
+				}
 
 				Thread.sleep(3000);
-
-				//Locate and click no thanks
-
 
 				//Locate and click on cart button
 				setValue(18);
 				By by_CartButton = getBy(locatorType,value);
 				WebElement click_CartButton = driver.findElement(by_CartButton);
-				clickElement(click_CartButton,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_CartButton,obj_Name);
+				}
+				else
+				{
+					clickElement(click_CartButton,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -678,7 +737,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(19);
 				By by_Delete = getBy(locatorType,value);
 				WebElement click_Delete = driver.findElement(by_Delete);
-				clickElement(click_Delete,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_Delete,obj_Name);
+				}
+				else
+				{
+					clickElement(click_Delete,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -686,7 +752,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(18);
 				By by_CartButton2 = getBy(locatorType,value);
 				WebElement click_CartButton2 = driver.findElement(by_CartButton2);
-				clickElement(click_CartButton2,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_CartButton2,obj_Name);
+				}
+				else
+				{
+					clickElement(click_CartButton2,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -697,17 +770,17 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				String actual = ele_Msg.getText();
 
 				//Verify actual result
-				result=verify("Your Shopping Cart is empty.", actual);
+				valResult=verify("Your Shopping Cart is empty.", actual);
 
 
-				//Send result for print
-				if(result.equals("Pass"))
+				//Send valResult for print
+				if(valResult.equals("Pass"))
 				{
-					Update_Report( result, "Amazon_TestCase_6",  "Execution Completed",driver);
+					Update_Report( valResult, "Amazon_TestCase_6",  "Execution Completed",driver);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_6",  "Verification Failed",driver);
+					Update_Report( valResult, "Amazon_TestCase_6",  "Verification Failed",driver);
 				}
 				driver.close();
 			}
@@ -718,7 +791,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 	public static String TestCase_7() throws IOException
@@ -727,6 +800,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
+		String valResult="";
 		startReport("Amazon_TestCase_7","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
@@ -759,7 +833,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(21);
 				By by_Help = getBy(locatorType,value);
 				WebElement click_Help = driver.findElement(by_Help);
-				clickElement(click_Help,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_Help,obj_Name);
+				}
+				else
+				{
+					clickElement(click_Help,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -786,7 +867,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				System.out.println(Arrays.toString(actual));
 				System.out.println(Arrays.toString(expected));
 
-				result = verifyDDValues(expected,actual);
+				valResult = verifyDDValues(expected,actual);
 
 				//Locate and validate text box header
 				setValue(24);
@@ -805,14 +886,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 					System.out.println("Text Box is displayed");
 				}
 
-				//Send result for print
-				if(result.equals("Pass"))
+				//Send valResult for print
+				if(valResult.equals("Pass"))
 				{
-					Update_Report( result, "Amazon_TestCase_7",  "Execution Completed",driver);
+					Update_Report( valResult, "Amazon_TestCase_7",  "Execution Completed",driver);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_7",  "Verification Failed",driver);
+					Update_Report( valResult, "Amazon_TestCase_7",  "Verification Failed",driver);
 				}
 				driver.close();
 			}
@@ -823,7 +904,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 
@@ -833,7 +914,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
-
+		String valResult="";
 		startReport("Amazon_TestCase_8","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
@@ -872,8 +953,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(2);
 				By by_SearchButton = getBy(locatorType,value);
 				WebElement click_SearchButton = driver.findElement(by_SearchButton);
-				clickElement(click_SearchButton,obj_Name);
-
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_SearchButton,obj_Name);
+				}
+				else
+				{
+					clickElement(click_SearchButton,obj_Name);
+				}
 				Thread.sleep(3000);
 
 				//Validate show result
@@ -887,7 +974,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(26);
 				By by_Product = getBy(locatorType,value);
 				WebElement click_Product = driver.findElement(by_Product);
-				clickElement(click_Product,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_Product,obj_Name);
+				}
+				else
+				{
+					clickElement(click_Product,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -899,7 +993,15 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(27);
 				By by_Quantity = getBy(locatorType,value);
 				WebElement click_Quantity = driver.findElement(by_Quantity);
-				clickElement(click_Quantity,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_Quantity,obj_Name);
+				}
+				else
+				{
+					clickElement(click_Quantity,obj_Name);
+				}
+
 
 				//Select from drop down
 				setValue(28);
@@ -910,7 +1012,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 					if(val==Integer.parseInt(quantity))
 					{
 						WebElement ele = ele_DD.get(val);
-						ele.click();
+						if(browserName.equalsIgnoreCase("microsoftedge"))
+						{
+							clickElement2(ele,obj_Name);
+						}
+						else
+						{
+							clickElement(ele,obj_Name);
+						}
 					}
 				}
 
@@ -920,7 +1029,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(29);
 				By by_AddtoCart = getBy(locatorType,value);
 				WebElement click_AddtoCart = driver.findElement(by_AddtoCart);
-				clickElement(click_AddtoCart,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_AddtoCart,obj_Name);
+				}
+				else
+				{
+					clickElement(click_AddtoCart,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -931,16 +1047,16 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				String items = ele_Items.getText();
 				int qntyt = Integer.parseInt(quantity)+1;
 				quantity=Integer.toString(qntyt);
-				result=verify(quantity, items);
+				valResult=verify(quantity, items);
 
-				//Send result for print
-				if(result.equals("Pass"))
+				//Send valResult for print
+				if(valResult.equals("Pass"))
 				{
-					Update_Report( result, "Amazon_TestCase_8",  "Execution Completed",driver);
+					Update_Report( valResult, "Amazon_TestCase_8",  "Execution Completed",driver);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_8",  "Verification Failed",driver);
+					Update_Report( valResult, "Amazon_TestCase_8",  "Verification Failed",driver);
 				}
 				driver.close();
 			}
@@ -951,7 +1067,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 	public static String TestCase_9() throws IOException
@@ -960,6 +1076,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
+		String valResult="";
 		startReport("Amazon_TestCase_9","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
@@ -1001,11 +1118,18 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(2);
 				By by_SearchButton = getBy(locatorType,value);
 				WebElement click_SearchButton = driver.findElement(by_SearchButton);
-				clickElement(click_SearchButton,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_SearchButton,obj_Name);
+				}
+				else
+				{
+					clickElement(click_SearchButton,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
-				//Validate show result
+				//Validate show valResult
 				setValue(3);
 				By by_ResultList = getBy(locatorType,value);
 				WebElement ele_ResultList = driver.findElement(by_ResultList);
@@ -1016,7 +1140,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(26);
 				By by_Product = getBy(locatorType,value);
 				WebElement click_Product = driver.findElement(by_Product);
-				clickElement(click_Product,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_Product,obj_Name);
+				}
+				else
+				{
+					clickElement(click_Product,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -1028,7 +1159,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(27);
 				By by_Quantity = getBy(locatorType,value);
 				WebElement click_Quantity = driver.findElement(by_Quantity);
-				clickElement(click_Quantity,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_Quantity,obj_Name);
+				}
+				else
+				{
+					clickElement(click_Quantity,obj_Name);
+				}
 
 				//Select from drop down
 				setValue(28);
@@ -1049,7 +1187,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(29);
 				By by_AddtoCart = getBy(locatorType,value);
 				WebElement click_AddtoCart = driver.findElement(by_AddtoCart);
-				clickElement(click_AddtoCart,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_AddtoCart,obj_Name);
+				}
+				else
+				{
+					clickElement(click_AddtoCart,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -1066,7 +1211,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(18);
 				By by_Cart = getBy(locatorType,value);
 				WebElement click_Cart = driver.findElement(by_Cart);
-				clickElement(click_Cart,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_Cart,obj_Name);
+				}
+				else
+				{
+					clickElement(click_Cart,obj_Name);
+				}
 
 				Thread.sleep(4000);
 
@@ -1074,7 +1226,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(30);
 				By by_QuantityCart = getBy(locatorType,value);
 				WebElement click_QuantityCart = driver.findElement(by_QuantityCart);
-				clickElement(click_QuantityCart,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_QuantityCart,obj_Name);
+				}
+				else
+				{
+					clickElement(click_QuantityCart,obj_Name);
+				}
 
 				//Locate and select quantity
 				setValue(31);
@@ -1104,7 +1263,14 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				setValue(32);
 				By by_SaveLater = getBy(locatorType,value);
 				WebElement click_SaveLater = driver.findElement(by_SaveLater);
-				clickElement(click_SaveLater,obj_Name);
+				if(browserName.equalsIgnoreCase("microsoftedge"))
+				{
+					clickElement2(click_SaveLater,obj_Name);
+				}
+				else
+				{
+					clickElement(click_SaveLater,obj_Name);
+				}
 
 				Thread.sleep(3000);
 
@@ -1114,16 +1280,16 @@ public class AutomationScripts_Amazon extends ReusableMethods
 				WebElement ele_SaveMsg = driver.findElement(by_SaveMsg);
 				String actual = ele_SaveMsg.getText();
 
-				result=verify("has been moved to Save for Later.",actual);
+				valResult=verify("has been moved to Save for Later.",actual);
 
-				//Send result for print
-				if(result.equals("Pass"))
+				//Send valResult for print
+				if(valResult.equals("Pass"))
 				{
-					Update_Report( result, "Amazon_TestCase_9",  "Execution Completed",driver);
+					Update_Report( valResult, "Amazon_TestCase_9",  "Execution Completed",driver);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_9",  "Verification Failed",driver);
+					Update_Report( valResult, "Amazon_TestCase_9",  "Verification Failed",driver);
 				}
 				driver.close();
 			}
@@ -1134,7 +1300,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 	public static String TestCase_10() throws IOException
@@ -1143,7 +1309,8 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
 		String browserName = cap.getBrowserName().toLowerCase();
 		System.out.println(browserName);
-		
+		String valResult="";
+
 		startReport("Amazon_TestCase_10","C:/Users/Seema/Desktop/AmazonReport/",browserName);
 		try
 		{
@@ -1188,16 +1355,16 @@ public class AutomationScripts_Amazon extends ReusableMethods
 					actual=w.getText();
 				}
 
-				result=verify("iphone",actual);
+				valResult=verify("iphone",actual);
 
-				//Send result for print
-				if(result.equals("Pass"))
+				//Send valResult for print
+				if(valResult.equals("Pass"))
 				{
-					Update_Report( result, "Amazon_TestCase_10",  "Execution Completed",driver);
+					Update_Report( valResult, "Amazon_TestCase_10",  "Execution Completed",driver);
 				}
 				else
 				{
-					Update_Report( result, "Amazon_TestCase_10",  "Verification Failed",driver);
+					Update_Report( valResult, "Amazon_TestCase_10",  "Verification Failed",driver);
 				}
 				driver.close();
 			}
@@ -1208,7 +1375,7 @@ public class AutomationScripts_Amazon extends ReusableMethods
 		{
 			System.out.println(e);
 		}
-		return result;
+		return valResult;
 	}
 
 
